@@ -110,7 +110,7 @@ noinst_HEADERS += util/string_builder.h
 noinst_HEADERS += util/testharness.h
 noinst_HEADERS += util/testutil.h
 
-lib_LTLIBRARIES = libhyperleveldb.la
+lib_LTLIBRARIES = libhyperleveldb.la libhypermemenv.la
 
 libhyperleveldb_la_SOURCES =
 libhyperleveldb_la_SOURCES += db/builder.cc
@@ -155,6 +155,10 @@ libhyperleveldb_la_SOURCES += util/status.cc
 libhyperleveldb_la_SOURCES += port/port_posix.cc
 libhyperleveldb_la_LIBADD = $(SNAPPY_LIBS) -lpthread
 libhyperleveldb_la_LDFLAGS = -lpthread $(AM_LDFLAGS) $(LDFLAGS)
+
+libhypermemenv_la_SOURCES = helpers/memenv/memenv.cc
+libhypermemenv_la_LIBADD = -lhyperleveldb
+libhypermemenv_la_LDFLAGS = -lpthread $(AM_LDFLAGS) $(LDFLAGS)
 
 TESTUTIL = util/testutil.cc
 TESTHARNESS = util/testharness.cc $(TESTUTIL)
